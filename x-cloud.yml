@@ -10,7 +10,7 @@ services:
         constraints:
           - node.role == manager
       restart_policy:
-        condition: on-failure:3
+        condition: on-failure
       replicas: 1
 
   x-auth:
@@ -19,7 +19,7 @@ services:
       - 3001:3001
     deploy:
       restart_policy:
-        condition: on-failure:3
+        condition: on-failure
       replicas: 1
 
   x-upms:
@@ -28,7 +28,7 @@ services:
       - 4000:4000
     deploy:
       restart_policy:
-        condition: on-failure:3
+        condition: on-failure
       replicas: 1
 
   x-gateway:
@@ -37,5 +37,5 @@ services:
       - 9999:9999
     deploy:
       restart_policy:
-        condition: on-failure:3
+        condition: on-failure
       replicas: 1
