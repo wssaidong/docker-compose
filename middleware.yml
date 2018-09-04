@@ -1,0 +1,37 @@
+version: '3.3'
+
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - 9379:6379
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      replicas: 1
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - 27018:27017
+    volumes:
+      - mongodb_data:/data/db
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      replicas: 1
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      replicas: 1
+
+volumes:
+ mongodb_data:

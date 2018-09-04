@@ -1,0 +1,33 @@
+version: '3.4'
+
+services:
+  x-config:
+    image: registry.cn-hongkong.aliyuncs.com/x-cloud/deploy:latest
+    ports:
+      - 4001:4001
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      replicas: 1
+
+  x-auth:
+    image: ccr.ccs.tencentyun.com/x-cloud/deploy-auth:auth
+    ports:
+      - 3001:3001
+    deploy:
+      replicas: 1
+
+  x-upms:
+    image: ccr.ccs.tencentyun.com/x-cloud/x-cloud-deploy:x-upms
+    ports:
+      - 4000:4000
+    deploy:
+      replicas: 1
+
+  x-gateway:
+    image: ccr.ccs.tencentyun.com/x-cloud/deploy-gateway:x-gateway
+    ports:
+      - 9999:9999
+    deploy:
+      replicas: 1
