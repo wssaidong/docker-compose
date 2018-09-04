@@ -9,6 +9,8 @@ services:
       placement:
         constraints:
           - node.role == manager
+      restart_policy:
+        condition: on-failure:3
       replicas: 1
 
   x-auth:
@@ -16,6 +18,8 @@ services:
     ports:
       - 3001:3001
     deploy:
+      restart_policy:
+        condition: on-failure:3
       replicas: 1
 
   x-upms:
@@ -23,6 +27,8 @@ services:
     ports:
       - 4000:4000
     deploy:
+      restart_policy:
+        condition: on-failure:3
       replicas: 1
 
   x-gateway:
@@ -30,4 +36,6 @@ services:
     ports:
       - 9999:9999
     deploy:
+      restart_policy:
+        condition: on-failure:3
       replicas: 1
