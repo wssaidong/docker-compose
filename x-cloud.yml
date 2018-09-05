@@ -43,7 +43,7 @@ services:
   x-mc:
     image: ccr.ccs.tencentyun.com/x-cloud/deploy-mc:x-mc
     ports:
-      - 9999:9999
+      - 4050:4050
     deploy:
       restart_policy:
         condition: on-failure
