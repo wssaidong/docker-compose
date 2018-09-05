@@ -39,3 +39,12 @@ services:
       restart_policy:
         condition: on-failure
       replicas: 1
+
+  x-mc:
+    image: ccr.ccs.tencentyun.com/x-cloud/deploy-mc:x-mc
+    ports:
+      - 9999:9999
+    deploy:
+      restart_policy:
+        condition: on-failure
+      replicas: 1
