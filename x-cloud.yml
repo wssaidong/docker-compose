@@ -2,7 +2,7 @@ version:  '3.4'
 
 services:
   x-config:
-    image: registry.cn-hongkong.aliyuncs.com/x-cloud/deploy:latest
+    image: ccr.ccs.tencentyun.com/x-cloud/deploy-config:x-config
     ports:
       - 4001:4001
     deploy:
