@@ -3,42 +3,33 @@ services:
   redis:
     image: redis:latest
     ports:
-      - target: 9379
-        published: 6379
-        protocol: tcp
-        mode: host
+      - 9379:6379
     deploy:
       placement:
         constraints:
-          - node.role == worker
+          - node.role == manager
       replicas: 1
 
   mongo:
     image: mongo:latest
     ports:
-      - target: 27018
-        published: 27017
-        protocol: tcp
-        mode: host
+      - 27018:27017
     volumes:
       - mongodb_data:/data/db
     deploy:
       placement:
         constraints:
-          - node.role == worker
+          - node.role == manager
       replicas: 1
 
   rabbitmq:
     image: rabbitmq:3-management
     ports:
-      - target: 5672
-        published: 5672
-        protocol: tcp
-        mode: host
+      - 5672:5672
     deploy:
       placement:
         constraints:
-          - node.role == worker
+          - node.role == manager
       replicas: 1
 
 volumes:
