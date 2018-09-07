@@ -1,4 +1,4 @@
-version:  '3.4'
+version: '3.4'
 
 services:
   x-config:
@@ -8,7 +8,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - node.role == worker
       restart_policy:
         condition: on-failure
       replicas: 1
@@ -20,7 +20,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - node.role == worker
       restart_policy:
         condition: on-failure
       replicas: 1
@@ -32,7 +32,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - node.role == worker
       restart_policy:
         condition: on-failure
       replicas: 1
@@ -44,7 +44,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - node.role == worker
       restart_policy:
         condition: on-failure
       replicas: 1
@@ -56,7 +56,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - node.role == worker
       restart_policy:
         condition: on-failure
       replicas: 1
