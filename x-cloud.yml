@@ -4,11 +4,14 @@ services:
   x-config:
     image: ccr.ccs.tencentyun.com/x-cloud/deploy-config:x-config
     ports:
-      - 4001:4001
+      - target: 4001
+        published: 4001
+        protocol: tcp
+        mode: ingress
     deploy:
       placement:
         constraints:
-          - node.role == worker
+          - node.role == manager
       restart_policy:
         condition: on-failure
       replicas: 1
@@ -16,11 +19,14 @@ services:
   x-auth:
     image: ccr.ccs.tencentyun.com/x-cloud/deploy-auth:auth
     ports:
-      - 3001:3001
+      - target: 3001
+        published: 3001
+        protocol: tcp
+        mode: ingress
     deploy:
       placement:
         constraints:
-          - node.role == worker
+          - node.role == manager
       restart_policy:
         condition: on-failure
       replicas: 1
@@ -28,11 +34,14 @@ services:
   x-upms:
     image: ccr.ccs.tencentyun.com/x-cloud/x-cloud-deploy:x-upms
     ports:
-      - 4000:4000
+      - target: 4000
+        published: 4000
+        protocol: tcp
+        mode: ingress
     deploy:
       placement:
         constraints:
-          - node.role == worker
+          - node.role == manager
       restart_policy:
         condition: on-failure
       replicas: 1
@@ -40,11 +49,14 @@ services:
   x-gateway:
     image: ccr.ccs.tencentyun.com/x-cloud/deploy-gateway:x-gateway
     ports:
-      - 9999:9999
+      - target: 9999
+        published: 9999
+        protocol: tcp
+        mode: ingress
     deploy:
       placement:
         constraints:
-          - node.role == worker
+          - node.role == manager
       restart_policy:
         condition: on-failure
       replicas: 1
@@ -52,11 +64,14 @@ services:
   x-mc:
     image: ccr.ccs.tencentyun.com/x-cloud/deploy-mc:x-mc
     ports:
-      - 4050:4050
+      - target: 4050
+        published: 4050
+        protocol: tcp
+        mode: ingress
     deploy:
       placement:
         constraints:
-          - node.role == worker
+          - node.role == manager
       restart_policy:
         condition: on-failure
       replicas: 1

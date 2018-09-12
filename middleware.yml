@@ -1,6 +1,22 @@
 version: '3'
 
 services:
+  mysql:
+    image: mysql
+    ports:
+      - 3307:3306
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - mysql_config:/etc/mysql
+    deploy:
+      placement:
+        constraints:
+          - node.role == worker
+      replicas: 1
+    environment:
+      MYSQL_ROOT_PASSWORD: rootadmin
+
   redis:
     image: redis:latest
     ports:
@@ -8,7 +24,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - node.role == worker
       replicas: 1
 
   mongo:
@@ -20,7 +36,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - node.role == worker
       replicas: 1
 
   rabbitmq:
@@ -30,8 +46,10 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - node.role == worker
       replicas: 1
 
 volumes:
  mongodb_data:
+ mysql_data:
+ mysql_config:
