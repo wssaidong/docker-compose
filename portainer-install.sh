@@ -1,5 +1,6 @@
-$ docker volume create portainer_data
-$ docker service create \
+sudo docker volume create portainer_data
+
+sudo docker service create \
 --name portainer \
 --publish 9000:9000 \
 --replicas=1 \

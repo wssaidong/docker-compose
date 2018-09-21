@@ -1,6 +1,6 @@
 version: '3.3'
 services:
-  portainer2:
+  portainer:
     image: portainer/portainer
     ports:
       - "9900:9000"

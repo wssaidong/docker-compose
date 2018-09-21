@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   x-config:
-    image: ccr.ccs.tencentyun.com/x-cloud/deploy-config:x-config
+    image: ccr.ccs.tencentyun.com/x-cloud/deploy-config:latest
     ports:
       - target: 4001
         published: 4001
@@ -11,13 +11,13 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - node.role == worker
       restart_policy:
         condition: on-failure
       replicas: 1
 
   x-auth:
-    image: ccr.ccs.tencentyun.com/x-cloud/deploy-auth:auth
+    image: ccr.ccs.tencentyun.com/x-cloud/deploy-auth:latest
     ports:
       - target: 3001
         published: 3001
@@ -26,13 +26,13 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - node.role == worker
       restart_policy:
         condition: on-failure
       replicas: 1
 
   x-upms:
-    image: ccr.ccs.tencentyun.com/x-cloud/x-cloud-deploy:x-upms
+    image: ccr.ccs.tencentyun.com/x-cloud/deploy-upms:latest
     ports:
       - target: 4000
         published: 4000
@@ -41,13 +41,13 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - node.role == worker
       restart_policy:
         condition: on-failure
       replicas: 1
 
   x-gateway:
-    image: ccr.ccs.tencentyun.com/x-cloud/deploy-gateway:x-gateway
+    image: ccr.ccs.tencentyun.com/x-cloud/deploy-gateway:latest
     ports:
       - target: 9999
         published: 9999
@@ -62,7 +62,7 @@ services:
       replicas: 1
 
   x-mc:
-    image: ccr.ccs.tencentyun.com/x-cloud/deploy-mc:x-mc
+    image: ccr.ccs.tencentyun.com/x-cloud/deploy-mc:latest
     ports:
       - target: 4050
         published: 4050
@@ -71,7 +71,7 @@ services:
     deploy:
       placement:
         constraints:
-          - node.role == manager
+          - node.role == worker
       restart_policy:
         condition: on-failure
       replicas: 1

@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+  kong-database:
+    image: postgres:9.5
+    ports:
+      - 5432:5432
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      replicas: 1
+    environment:
+      POSTGRES_USER: kong
+      POSTGRES_DB: kong
+      
+  kong-m:
+    image: kong:latest
+    links:
+      - kong-database:kong-database
+    ports:
+      - 8000
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      replicas: 1
+    environment:
+      - KONG_PG_HOST=kong-database
+      - KONG_PG_DATABASE=kong
+      - 'KONG_CASSANDRA_CONTACT_POINTS=kong-database'
+    command: kong migrations up
+
+  kong:
+    image: kong:latest
+    links:
+      - kong-database:kong-database
+    ports:
+      - '80:8000/tcp'
+      - '8001:8001/tcp'
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      replicas: 1
+    environment:
+      - KONG_PG_HOST=kong-database
+      - KONG_PG_DATABASE=kong
+      - 'KONG_CASSANDRA_CONTACT_POINTS=kong-database'
+      - 'KONG_ADMIN_LISTEN=0.0.0.0:8001'
+      - 'KONG_ADMIN_LISTEN_SSL=0.0.0.0:8444'
+
+  kong-dashboard:
+    image: pgbi/kong-dashboard
+    ports:
+      - 8080:8080
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+      replicas: 1
+    command: start --kong-url http://caishaodong.top:8001
+volumes:
+ postgres_data:
