@@ -59,6 +59,6 @@ services:
         constraints:
           - node.role == manager
       replicas: 1
-    command: start --kong-url http://caishaodong.top:8001
+    command: start --kong-url http://kong:8001
 volumes:
  postgres_data:
